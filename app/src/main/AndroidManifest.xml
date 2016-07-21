@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PermissionActivity"></activity>
+        <activity android:name=".PermissionActivity" />
+        <activity android:name=".ListPopupWindowActivity"></activity>
     </application>
 
 </manifest>

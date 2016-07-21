@@ -19,7 +19,6 @@ import android.widget.Toast;
 @TargetApi(23)
 public class PermissionUtils {
 
-    private ResultListener resultListener = null;
 
     public static  void checkAndRequestPermission(Context context,int requestCode,Permissions... permissionsGroup){
 
