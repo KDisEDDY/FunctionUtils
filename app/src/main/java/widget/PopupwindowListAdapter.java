@@ -6,7 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import project.ljy.functionutils.R;
 
@@ -19,12 +23,12 @@ import project.ljy.functionutils.R;
  * Date: 2016/7/19
  * Version: 1.0
  */
-public class PopupwindowListAdapter<T> extends RecyclerView.Adapter<PopupwindowListAdapter.ViewHolder> {
+public class PopupwindowListAdapter extends RecyclerView.Adapter<PopupwindowListAdapter.ViewHolder> {
 
-    private List<T> list = null;
+    private List<Bean> list = null;
 
-    public PopupwindowListAdapter(List<T> list) {
-        this.list = list;
+    public PopupwindowListAdapter(List<Bean> list) {
+            this.list = list;
     }
 
     @Override
@@ -38,11 +42,12 @@ public class PopupwindowListAdapter<T> extends RecyclerView.Adapter<PopupwindowL
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        holder.tv_recyclelist_date.setText(list.get(position).getDate());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
