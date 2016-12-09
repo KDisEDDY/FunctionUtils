@@ -1,4 +1,4 @@
-package project.ljy.functionutils;
+package project.ljy.functionutils.listpopup;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import project.ljy.functionutils.R;
 import widget.DatePickerPopupWindow;
 
 public class ListPopupWindowActivity extends AppCompatActivity {

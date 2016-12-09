@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_layout_root"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".listpopup.ListPopupWindowActivity">
-    <TextView
-        android:id="@+id/tv_listpopup_poplist"
+    tools:context=".fragmenttest.MyFragmentActivity">
+    <FrameLayout
+        android:id="@+id/fl_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="PopupWindow"
-        style="@style/TextViewStyle"
-        />
+        android:layout_height="match_parent"/>
 </RelativeLayout>
