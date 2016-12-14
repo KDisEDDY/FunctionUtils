@@ -37,4 +37,12 @@
         android:text="测试通知栏里面更新下载进度条"
         android:onClick="onClick"
         />
+    <Button
+        android:id="@+id/btn_background_musicplayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonStyle"
+        android:text="测试Service播放音乐"
+        android:onClick="onClick"
+        />
 </LinearLayout>

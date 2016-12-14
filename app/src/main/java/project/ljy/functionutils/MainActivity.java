@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import project.ljy.functionutils.bgplayer.TestMediaActivity;
 import project.ljy.functionutils.fragmenttest.MyFragmentActivity;
 import project.ljy.functionutils.listpopup.ListPopupWindowActivity;
 import project.ljy.functionutils.notification.NotificationDownLoadActivity;
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_notification_download:
                 startActivity(new Intent(MainActivity.this,NotificationDownLoadActivity.class));
                 break;
+            case R.id.btn_background_musicplayer:
+                startActivity(new Intent(MainActivity.this, TestMediaActivity.class));
             default:
                 break;
         }
