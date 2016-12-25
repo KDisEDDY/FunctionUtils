@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 /**
@@ -20,15 +21,27 @@ import android.widget.Toast;
 public class PermissionUtils {
 
 
-    public static  void checkAndRequestPermission(Context context,int requestCode,Permissions... permissionsGroup){
+    public static  void checkAndRequestPermission(Context context,int requestCode,String... permissionsGroup){
 
-        for(Permissions p : permissionsGroup){
-            int code = ActivityCompat.checkSelfPermission(context,p.toString());
-            if (code == PackageManager.PERMISSION_GRANTED) {
-            }
-            else{
-                ActivityCompat.requestPermissions((Activity) context,new String[]{p.toString()},requestCode);
-            }
+        for(String p : permissionsGroup){
+            if (ContextCompat.checkSelfPermission(context, p) != PackageManager.PERMISSION_GRANTED) {
+
+                    // 判断是否提示用户获取权限行为的解释，为true时向用户解释
+                    if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,p)) {
+
+                    } else {
+
+                        // No explanation needed, we can request the permission.
+
+                        ActivityCompat.requestPermissions((Activity) context,
+                                new String[]{p},
+                                requestCode);
+
+                        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                        // app-defined int constant. The callback method gets the
+                        // result of the request.
+                    }
+                }
 
         }
     }

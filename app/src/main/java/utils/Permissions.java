@@ -23,17 +23,17 @@ public  enum Permissions{
     send_sms(Manifest.permission.SEND_SMS),
     call_phone(Manifest.permission.CALL_PHONE);
 
-    public Manifest.permission getP() {
-        return p;
+    public String getValue() {
+        return p.toString();
     }
 
-    public void setP(Manifest.permission p) {
+    public void setValue(String p) {
         this.p = p;
     }
 
-    private Manifest.permission p;
+    private String p;
 
-    Permissions(Object permission){
-        this.p = (Manifest.permission) permission;
+    Permissions(String permission){
+        this.p = permission;
     }
 }
