@@ -24,10 +24,13 @@ public class WebBrowerActivity extends AppCompatActivity {
             webView.addJavascriptInterface(new TestFunction(),"testFunc");
             // 设置支持javascript
             webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.getSettings().setLoadWithOverviewMode(true);
+            webView.getSettings().setBlockNetworkImage(false);
 //启动缓存
             webView.getSettings().setAppCacheEnabled(true);
             //设置缓存模式
-            webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+            webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         }
     }
 }

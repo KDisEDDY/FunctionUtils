@@ -34,7 +34,6 @@ public class MusicService extends Service {
         super.onDestroy();
         if (mMediaPlayer != null) {
             mMediaPlayer.release();
-            mMediaPlayer.stop();
         }
     }
 
