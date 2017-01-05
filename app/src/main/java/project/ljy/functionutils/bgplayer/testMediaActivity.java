@@ -1,5 +1,15 @@
 package project.ljy.functionutils.bgplayer;
 
+/**
+ * Title: TestMediaActivity
+ * Description:
+ * Copyright: Copyright (c) 2014-2016 gjfax.com
+ * Company: 广金所
+ * Author: 刘加彦
+ * Date: 2016/12/15
+ * Version: 1.0
+ */
+
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -43,6 +53,12 @@ public class TestMediaActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mServiceConnection);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_start:
@@ -60,3 +76,4 @@ public class TestMediaActivity extends AppCompatActivity implements View.OnClick
         }
     }
 }
+
