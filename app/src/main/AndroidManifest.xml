@@ -36,7 +36,7 @@
             android:screenOrientation="portrait" />
 
         <service
-            android:name=".service.MusicService"
+            android:name=".bgplayer.service.MusicService"
             android:enabled="true"
             android:exported="true" />
 

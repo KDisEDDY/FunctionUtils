@@ -1,4 +1,4 @@
-package project.ljy.functionutils.service;
+package project.ljy.functionutils.bgplayer.service;
 
 import android.app.Service;
 import android.content.Intent;

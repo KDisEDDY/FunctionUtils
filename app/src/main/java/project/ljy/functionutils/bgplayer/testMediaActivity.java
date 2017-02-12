@@ -19,7 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import project.ljy.functionutils.R;
-import project.ljy.functionutils.service.MusicService;
+import project.ljy.functionutils.bgplayer.service.MusicService;
 
 public class TestMediaActivity extends AppCompatActivity implements View.OnClickListener{
 

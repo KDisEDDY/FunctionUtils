@@ -45,4 +45,12 @@
         android:text="测试Service播放音乐"
         android:onClick="onClick"
         />
+    <Button
+        android:id="@+id/btn_webView_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonStyle"
+        android:text="测试js与原生交互功能"
+        android:onClick="onClick"
+        />
 </LinearLayout>

@@ -23,13 +23,6 @@
             android:orientation="vertical"
             >
             <Button
-                android:id="@+id/btn_aniationtest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/str_btn_aniationtest"
-                android:onClick="btn_Click"
-                />
-            <Button
                 android:id="@+id/btn_slidelistview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

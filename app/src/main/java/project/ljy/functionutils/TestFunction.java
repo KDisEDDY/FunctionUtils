@@ -4,7 +4,7 @@ import android.webkit.JavascriptInterface;
 
 /**
  * Title: TestFunction
- * Description:
+ * Description:js与原生交互接口类
  * Copyright: Copyright (c) 2014-2016 gjfax.com
  * Company: 广金所
  * Author: 刘加彦

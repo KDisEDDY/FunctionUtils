@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_background_musicplayer:
                 startActivity(new Intent(MainActivity.this, TestMediaActivity.class));
+                break;
             case R.id.btn_webView_test:
                 startActivity(new Intent(MainActivity.this, WebBrowerActivity.class));
                 break;

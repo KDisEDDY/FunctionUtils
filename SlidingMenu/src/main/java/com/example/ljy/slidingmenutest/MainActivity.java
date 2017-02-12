@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void btn_Click(View view){
         switch (view.getId()){
-            case R.id.btn_aniationtest:
-                startActivity(new Intent(MainActivity.this,AnimationTestActivity.class));
-                break;
             case R.id.btn_slidelistview:
                 startActivity(new Intent(MainActivity.this,SlideListViewActivity.class));
                 break;
