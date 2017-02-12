@@ -5,8 +5,8 @@
 ### bgplayer
     bgplayer的主要难点是对player的状态理解，下图为其状态图：
    ![image](https://github.com/KDisEDDY/FunctionUtils/blob/master/picture/mediaplayer_state.gif)
-   
-       一般播放器是使用Service来控制Mediaplayer的状态的，这样可以实现后台播放功能
+
+    一般播放器是使用Service来控制Mediaplayer的状态的，这样可以实现后台播放功能
 ### fragmenttest
     测试Fragment的onActivityResult方法的调用
 ### listpopup
