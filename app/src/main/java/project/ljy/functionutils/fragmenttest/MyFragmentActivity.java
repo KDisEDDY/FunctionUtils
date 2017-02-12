@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentTransaction;
 import project.ljy.functionutils.R;
 import project.ljy.functionutils.fragmenttest.fragment.FragmentA;
 
+/**
+ * 测试Fragment的onActivityResult方法的调用
+ */
 public class MyFragmentActivity extends FragmentActivity {
     private FragmentA mFragmentA = null;
 
