@@ -19,8 +19,7 @@
 ## Moudle SlidingMenu 的介绍
     SlidingMenu是我在刚毕业时练手自定义view的一个控件，项目里主要有两个控件：
    * SlidingMenu
-    参考了鸿洋的自定义SlidingMenu的博客，地址是
-   [http://blog.csdn.net/lmj623565791/article/details/39185641][1]
+    参考了鸿洋的自定义SlidingMenu的博客，地址是[http://blog.csdn.net/lmj623565791/article/details/39185641][1]
    * SlideLayout
     这个控件是滑动LinearLayout控件，实现了横向滑动的功能，其内部View可自定义，适合扩展。
     
