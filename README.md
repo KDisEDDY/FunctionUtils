@@ -18,9 +18,9 @@
     封装了一个6.0运行时权限工具类，本想使用枚举类来设置权限数组的，但感觉增加了复杂度，所以没有用到，需要在activity中配合使用onRequestPermissionsResult方法，来回调获取权限厚度操作
 ## Moudle SlidingMenu 的介绍
     SlidingMenu是我在刚毕业时练手自定义view的一个控件，项目里主要有两个控件：
-   * SlidingMenu
+    * SlidingMenu
     参考了鸿洋的自定义SlidingMenu的博客，地址是[http://blog.csdn.net/lmj623565791/article/details/39185641][1]
-   * SlideLayout
+    * SlideLayout
     这个控件是滑动LinearLayout控件，实现了横向滑动的功能，其内部View可自定义，适合扩展。
     
 [1]: http://blog.csdn.net/lmj623565791/article/details/39185641
