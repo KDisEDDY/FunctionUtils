@@ -4,7 +4,8 @@
 ## Module app 的介绍
 ### bgplayer
         bgplayer的主要难点是对player的状态理解，下图为其状态图：
-        ![image](https://github.com/FunctionUtils/picture/mediaplayer_state.gif)
+![image](https://github.com/FunctionUtils/picture/mediaplayer_state.gif)
+
         一般播放器是使用Service来控制Mediaplayer的状态的，这样可以实现后台播放功能
 ### fragmenttest
         测试Fragment的onActivityResult方法的调用
@@ -16,6 +17,8 @@
 ## Moudle SlidingMenu 的介绍
         SlidingMenu是我在刚毕业时练手自定义view的一个控件，项目里主要有两个控件：
     1.  SlidingMenu
-        参考了鸿洋的自定义SlidingMenu的博客，地址是[http://blog.csdn.net/lmj623565791/article/details/39185641]:http://blog.csdn.net/lmj623565791/article/details/39185641
+        参考了鸿洋的自定义SlidingMenu的博客，地址是
+[http://blog.csdn.net/lmj623565791/article/details/39185641](http://blog.csdn.net/lmj623565791/article/details/39185641)
+
     2.  SlideLayout
         这个控件是滑动LinearLayout控件，实现了横向滑动的功能，其内部View可自定义，适合扩展。
