@@ -3,7 +3,7 @@
 而Module SlidingMenu是学习自定义侧滑菜单控件的所创建的，其中包含自定义侧滑菜单控件和滑动删除控件。
 ## Module app 的介绍
 ### bgplayer
-bgplayer的主要难点是对player的状态理解，下图为其状态图：![image](https://github.com/KDisEDDY/FunctionUtils/picture/mediaplayer_state.gif)
+bgplayer的主要难点是对player的状态理解，下图为其状态图：![image](https://github.com/KDisEDDY/FunctionUtils/blob/master/picture/mediaplayer_state.gif)
 一般播放器是使用Service来控制Mediaplayer的状态的，这样可以实现后台播放功能
 ### fragmenttest
 测试Fragment的onActivityResult方法的调用
