@@ -4,8 +4,11 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -17,10 +20,35 @@ import android.widget.Toast;
  * Date: 2016/7/18
  * Version: 1.0
  */
-@TargetApi(23)
 public class PermissionUtils {
 
 
+    /**
+     * Check if the calling context has a set of permissions.
+     *
+     * @param context
+     *         the calling context.
+     * @param perms
+     *         one ore more permissions, such as {@code android.Manifest.permission.CAMERA}.
+     * @return true if all permissions are already granted, false if at least one permission is not yet granted.
+     */
+    public static boolean hasPermissions(@NonNull Context context, @NonNull String... perms) {
+        // Always return true for SDK < M, let the system deal with the permissions
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+
+        for (String perm : perms) {
+            boolean hasPerm = (ContextCompat.checkSelfPermission(context, perm) ==
+                    PackageManager.PERMISSION_GRANTED);
+            if (!hasPerm) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @TargetApi(23)
     public static  void checkAndRequestPermission(Context context,int requestCode,String... permissionsGroup){
 
         for(String p : permissionsGroup){
@@ -41,7 +69,9 @@ public class PermissionUtils {
                         // app-defined int constant. The callback method gets the
                         // result of the request.
                     }
-                }
+                } else {
+                Toast.makeText(context, "grant the permission",Toast.LENGTH_SHORT).show();
+            }
 
         }
     }

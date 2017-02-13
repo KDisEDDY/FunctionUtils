@@ -34,7 +34,14 @@ public class PermissionActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_main_opensms:
-                PermissionUtils.checkAndRequestPermission(this,REQUESTCODE_OPENSMS, Manifest.permission.SEND_SMS);
+                if(PermissionUtils.hasPermissions(this,Manifest.permission.SEND_SMS)){
+                    Uri smsToUri = Uri.parse("smsto:");
+                    Intent intent = new Intent(Intent.ACTION_SENDTO, smsToUri);
+                    intent.putExtra("sms_body","ddddddddddd");
+                    startActivity(intent);
+                } else {
+                    PermissionUtils.checkAndRequestPermission(this,REQUESTCODE_OPENSMS, Manifest.permission.SEND_SMS);
+                }
                 break;
             default:
                 break;
