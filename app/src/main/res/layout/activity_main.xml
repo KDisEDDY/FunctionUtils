@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="project.ljy.functionutils.MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
     <Button
         android:id="@+id/btn_main_testMPermission"
         android:layout_width="match_parent"
@@ -45,12 +50,28 @@
         android:text="测试Service播放音乐"
         android:onClick="onClick"
         />
+
     <Button
         android:id="@+id/btn_webView_test"
+        style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/ButtonStyle"
-        android:text="测试js与原生交互功能"
         android:onClick="onClick"
-        />
-</LinearLayout>
+        android:text="测试js与原生交互功能" />
+
+    <Button
+        android:id="@+id/btn_mulitUse_A"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="MulitUse_A" />
+    <Button
+        android:id="@+id/btn_mulitUse_B"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="MulitUse_B" />
+    </LinearLayout>
+</ScrollView>

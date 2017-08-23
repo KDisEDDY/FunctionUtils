@@ -2,12 +2,16 @@ package utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.RadialGradient;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -49,30 +53,37 @@ public class PermissionUtils {
     }
 
     @TargetApi(23)
-    public static  void checkAndRequestPermission(Context context,int requestCode,String... permissionsGroup){
+    public static  void checkAndRequestPermission(final Context context, final int requestCode, String... permissionsGroup){
+        // TODO: 2017/8/23 1：遍历权限，找出不被通过的权限；2：找出可以申请的权限；3：申请权限；
 
-        for(String p : permissionsGroup){
-            if (ContextCompat.checkSelfPermission(context, p) != PackageManager.PERMISSION_GRANTED) {
+        for(final String p : permissionsGroup){
+            // 判断是否提示用户获取权限行为的解释，为true时向用户解释
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,p)) {
+                AlertDialog dialog = new AlertDialog.Builder(context)
+                        .setMessage("需要改权限用于XXX")
+                        .setTitle("权限说明")
+                        .setPositiveButton("给予", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions((Activity) context,
+                                        new String[]{p},
+                                        requestCode);
+                            }
+                        })
+                        .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    // 判断是否提示用户获取权限行为的解释，为true时向用户解释
-                    if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,p)) {
+                            }
+                        })
+                        .create();
+                dialog.show();
+            } else {
 
-                    } else {
-
-                        // No explanation needed, we can request the permission.
-
-                        ActivityCompat.requestPermissions((Activity) context,
-                                new String[]{p},
-                                requestCode);
-
-                        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                        // app-defined int constant. The callback method gets the
-                        // result of the request.
-                    }
-                } else {
-                Toast.makeText(context, "grant the permission",Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions((Activity) context,
+                        new String[]{p},
+                        requestCode);
             }
-
         }
     }
 

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import project.ljy.functionutils.bgplayer.TestMediaActivity;
 import project.ljy.functionutils.fragmenttest.MyFragmentActivity;
@@ -83,6 +84,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_webView_test:
                 startActivity(new Intent(MainActivity.this, WebBrowerActivity.class));
+                break;
+            case R.id.btn_mulitUse_A:
+                startActivity(new Intent(MainActivity.this, MuiltUseActivity.class).putExtra(MuiltUseActivity.TYPE,1));
+                break;
+            case R.id.btn_mulitUse_B:
+                startActivity(new Intent(MainActivity.this, MuiltUseActivity.class).putExtra(MuiltUseActivity.TYPE,2));
                 break;
             default:
                 break;
