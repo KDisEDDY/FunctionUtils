@@ -24,6 +24,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".permission.PermissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".listpopup.ListPopupWindowActivity"
             android:screenOrientation="portrait" />
         <activity
