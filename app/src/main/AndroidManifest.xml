@@ -3,6 +3,7 @@
     package="project.ljy.functionutils">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -17,15 +18,7 @@
         <activity
             android:name=".permission.PermissionActivity"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity
-            android:name=".permission.PermissionActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".listpopup.ListPopupWindowActivity"
             android:screenOrientation="portrait" />
@@ -52,7 +45,12 @@
             android:name=".WebBrowerActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".MuiltUseActivity"></activity>
+        <activity android:name=".MuiltEdtActivity">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
     </application>
 
 </manifest>
