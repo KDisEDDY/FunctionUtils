@@ -2,5 +2,7 @@
     <string name="app_name">FunctionUtils</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="permission_open_sms_with_lib">openSmsWithLib</string>
 </resources>

@@ -20,4 +20,12 @@
         style="@style/ButtonStyle"
         android:text="opensms"
         />
+
+    <Button
+        android:id="@+id/btn_opensms_lib"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonStyle"
+        android:text="@string/permission_open_sms_with_lib"
+        />
 </LinearLayout>
