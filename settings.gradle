@@ -1,1 +1,1 @@
-include ':app', ':SlidingMenu', ':clicknablespantext'
+include ':app', ':SlidingMenu', ':clicknablespantext', ':aspectjprograming'

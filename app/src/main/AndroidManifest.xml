@@ -18,11 +18,6 @@
         <activity
             android:name=".permission.PermissionActivity"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".listpopup.ListPopupWindowActivity"
@@ -50,7 +45,14 @@
             android:name=".WebBrowerActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".MuiltEdtActivity">
+        <activity
+            android:name=".MuiltEdtActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

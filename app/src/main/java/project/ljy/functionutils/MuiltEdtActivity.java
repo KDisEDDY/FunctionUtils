@@ -30,30 +30,40 @@ public class MuiltEdtActivity extends AppCompatActivity {
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
             Log.i("testFilter" , "source : " + source + " dest:" + dest);
             Log.i("testLocation" ,"source:" + start + "," + end + "  dest:" + dstart + "," + dend);
-
-            if(dest.length() == 17){
+            String str = dest.toString().replace(" " , "");
+            if(str.length() == 17){
                 //当为数字时直接填充
                 Pattern pattern = Pattern.compile("[0-9]");
                 Matcher match = pattern.matcher(source);
                 if(match.find()){
-                    return null;
+                    //匹配的字符串是单个字符的，group只返回一个字符
+                    return match.group();
                 }
                 //最后一位且为X时填充
-                if(dstart == dest.toString().length() && (source.equals("X")||source.equals("x"))){
+                if(dstart == str.length() && (source.equals("X")||source.equals("x"))){
                     //最后一个字母
                     return null;
                 } else {
                     return "";
                 }
-            } else if(dest.length() < 17){
-                Pattern pattern = Pattern.compile("[^0-9]");
+            } else if(str.length() < 17){
+                //取的是包含多个字符的字符串
+                Pattern pattern = Pattern.compile("\\d+");
                 Matcher match = pattern.matcher(source);
                 if(match.find()){
-                    return "";
+                    //求还剩多少位可填
+                    int requireNum = 18 - str.length();
+                    int matchNum = match.end() - match.start();
+                    if(requireNum >= matchNum){
+                        //当剩余位数大于填入的字符串时，直接填入
+                        return source.subSequence(match.start(),match.end());
+                    } else {
+                        return source.subSequence(match.start(),match.start() + requireNum);
+                    }
                 } else {
-                    return null;
+                    return "";
                 }
-            } else if(dest.length() >= 18){
+            } else if(str.length() >= 18){
                 return "";
             }
             return "";
@@ -79,21 +89,71 @@ public class MuiltEdtActivity extends AppCompatActivity {
         spanBuilder.setSpan(new AbsoluteSizeSpan(8, true), 61, 62, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         //setText到需要的TextView里面
         mSpanTxt.setText(spanBuilder);
-
+//        mInputEdt.getEditableText().setFilters(new InputFilter[]{mInputFilter});
+        mInputEdt.setInputType(InputType.TYPE_CLASS_NUMBER);
         mInputEdt.addTextChangedListener(new TextWatcher() {
+
+            private static final int TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
+            private static final int TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
+            private static final int DIVIDER_MODULO = 5; // means divider position is every 5th symbol beginning with 1
+            private static final int DIVIDER_POSITION = DIVIDER_MODULO - 1; // means divider position is every 4th symbol beginning with 0
+            private static final char DIVIDER = ' ';
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                // noop
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                // noop
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                s.setFilters(new InputFilter[]{mInputFilter});
+                if (!isInputCorrect(s, TOTAL_SYMBOLS, DIVIDER_MODULO, DIVIDER)) {
+                    s.replace(0, s.length(), buildCorrecntString(getDigitArray(s, TOTAL_DIGITS), DIVIDER_POSITION, DIVIDER));
+                }
+            }
+
+            private boolean isInputCorrect(Editable s, int totalSymbols, int dividerModulo, char divider) {
+                boolean isCorrect = s.length() <= totalSymbols; // check size of entered string
+                for (int i = 0; i < s.length(); i++) { // chech that every element is right
+                    if (i > 0 && (i + 1) % dividerModulo == 0) {
+                        isCorrect &= divider == s.charAt(i);
+                    } else {
+                        isCorrect &= Character.isDigit(s.charAt(i));
+                    }
+                }
+                return isCorrect;
+            }
+
+            private String buildCorrecntString(char[] digits, int dividerPosition, char divider) {
+                final StringBuilder formatted = new StringBuilder();
+
+                for (int i = 0; i < digits.length; i++) {
+                    if (digits[i] != 0) {
+                        formatted.append(digits[i]);
+                        if ((i > 0) && (i < (digits.length - 1)) && (((i + 1) % dividerPosition) == 0)) {
+                            formatted.append(divider);
+                        }
+                    }
+                }
+
+                return formatted.toString();
+            }
+
+            private char[] getDigitArray(final Editable s, final int size) {
+                char[] digits = new char[size];
+                int index = 0;
+                for (int i = 0; i < s.length() && index < size; i++) {
+                    char current = s.charAt(i);
+                    if (Character.isDigit(current)) {
+                        digits[index] = current;
+                        index++;
+                    }
+                }
+                return digits;
             }
         });
     }
