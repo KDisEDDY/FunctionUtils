@@ -18,7 +18,7 @@ import android.widget.TextView;
  * Date: 2017/4/1
  * Version: 1.0
  */
-public class ClicknableSpanTextView extends TextView {
+public class ClicknableSpanTextView extends android.support.v7.widget.AppCompatTextView {
 
     private OnClickListener mOnClickListener;
 
@@ -42,9 +42,11 @@ public class ClicknableSpanTextView extends TextView {
             return ;
         }
         mSpannable = new SpannableString(string);
+        setLinkTextColor(getResources().getColor(R.color.btn_text_blue));
         mSpannable.setSpan(new Clickable(mOnClickListener), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         setText(mSpannable);
         setMovementMethod(LinkMovementMethod.getInstance());
+        setHighlightColor(getResources().getColor(android.R.color.transparent));
     }
 
     public void setSpanClickListener(OnClickListener onClickListener){
@@ -52,7 +54,7 @@ public class ClicknableSpanTextView extends TextView {
     }
 
     /** 客服部分可点击类    */
-    class Clickable extends ClickableSpan implements OnClickListener {
+    private class Clickable extends ClickableSpan implements OnClickListener {
         private final OnClickListener mListener;
 
         public Clickable(OnClickListener l) {

@@ -14,15 +14,21 @@ import android.text.style.StrikethroughSpan;
 import android.text.style.SubscriptSpan;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import project.ljy.clicknablespantext.ClicknableSpanTextView;
+
 public class MuiltEdtActivity extends AppCompatActivity {
 
     private EditText mInputEdt;
+
+    private ClicknableSpanTextView mSpanTextView ;
 
     //身份证输入inputFilter
     private InputFilter mInputFilter = new InputFilter() {
@@ -70,6 +76,77 @@ public class MuiltEdtActivity extends AppCompatActivity {
         }
     };
 
+    private class MyTextWatcher implements TextWatcher{
+        private static final int TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
+        private static final int TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
+        private static final int DIVIDER_MODULO = 5; // means divider position is every 5th symbol beginning with 1
+        private static final int DIVIDER_POSITION = DIVIDER_MODULO - 1; // means divider position is every 4th symbol beginning with 0
+        private static final char DIVIDER = ' ';
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // noop
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // noop
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (!isInputCorrect(s, TOTAL_SYMBOLS, DIVIDER_MODULO, DIVIDER)) {
+                s.replace(0, s.length(), buildCorrecntString(getDigitArray(s, TOTAL_DIGITS), DIVIDER_POSITION, DIVIDER));
+            }
+        }
+
+        private boolean isInputCorrect(Editable s, int totalSymbols, int dividerModulo, char divider) {
+            boolean isCorrect = s.length() <= totalSymbols; // check size of entered string
+            for (int i = 0; i < s.length(); i++) { // chech that every element is right
+                if (i > 0 && (i + 1) % dividerModulo == 0) {
+                    isCorrect &= divider == s.charAt(i);
+                } else {
+                    isCorrect &= Character.isDigit(s.charAt(i));
+                }
+            }
+            return isCorrect;
+        }
+
+        private String buildCorrecntString(char[] digits, int dividerPosition, char divider) {
+            final StringBuilder formatted = new StringBuilder();
+
+            for (int i = 0; i < digits.length; i++) {
+                if (digits[i] != 0) {
+                    formatted.append(digits[i]);
+                    if ((i > 0) && (i < (digits.length - 1)) && (((i + 1) % dividerPosition) == 0)) {
+                        formatted.append(divider);
+                    }
+                }
+            }
+
+            return formatted.toString();
+        }
+
+        private char[] getDigitArray(final Editable s, final int size) {
+            char[] digits = new char[size];
+            int index = 0;
+            for (int i = 0; i < s.length() && index < size; i++) {
+                char current = s.charAt(i);
+                if (Character.isDigit(current)) {
+                    digits[index] = current;
+                    index++;
+                }
+            }
+            return digits;
+        }
+    }
+
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(MuiltEdtActivity.this,"你点击了" , Toast.LENGTH_SHORT).show();
+        }
+    } ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +154,7 @@ public class MuiltEdtActivity extends AppCompatActivity {
         setContentView(R.layout.activity_muilt_edt);
         TextView mSpanTxt = (TextView) findViewById(R.id.tv_span);
         mInputEdt = (EditText) findViewById(R.id.et_input);
+        mSpanTextView = (ClicknableSpanTextView) findViewById(R.id.view_click_link_txt);
         //创建SpannableString实例，配置要设置spannable的文字，这里SpannableString和SpannableStringBuilder都可以
         SpannableStringBuilder spanBuilder = new SpannableStringBuilder("怒发冲冠，凭阑处、潇潇雨歇。抬望眼、仰天长啸，壮怀激烈。三十功名尘与土，" +
                 "八千里路云和月。莫等闲，白了少年头，空悲切。\n");
@@ -91,70 +169,9 @@ public class MuiltEdtActivity extends AppCompatActivity {
         mSpanTxt.setText(spanBuilder);
 //        mInputEdt.getEditableText().setFilters(new InputFilter[]{mInputFilter});
         mInputEdt.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mInputEdt.addTextChangedListener(new TextWatcher() {
+        mInputEdt.addTextChangedListener(new MyTextWatcher());
 
-            private static final int TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
-            private static final int TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
-            private static final int DIVIDER_MODULO = 5; // means divider position is every 5th symbol beginning with 1
-            private static final int DIVIDER_POSITION = DIVIDER_MODULO - 1; // means divider position is every 4th symbol beginning with 0
-            private static final char DIVIDER = ' ';
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // noop
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // noop
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (!isInputCorrect(s, TOTAL_SYMBOLS, DIVIDER_MODULO, DIVIDER)) {
-                    s.replace(0, s.length(), buildCorrecntString(getDigitArray(s, TOTAL_DIGITS), DIVIDER_POSITION, DIVIDER));
-                }
-            }
-
-            private boolean isInputCorrect(Editable s, int totalSymbols, int dividerModulo, char divider) {
-                boolean isCorrect = s.length() <= totalSymbols; // check size of entered string
-                for (int i = 0; i < s.length(); i++) { // chech that every element is right
-                    if (i > 0 && (i + 1) % dividerModulo == 0) {
-                        isCorrect &= divider == s.charAt(i);
-                    } else {
-                        isCorrect &= Character.isDigit(s.charAt(i));
-                    }
-                }
-                return isCorrect;
-            }
-
-            private String buildCorrecntString(char[] digits, int dividerPosition, char divider) {
-                final StringBuilder formatted = new StringBuilder();
-
-                for (int i = 0; i < digits.length; i++) {
-                    if (digits[i] != 0) {
-                        formatted.append(digits[i]);
-                        if ((i > 0) && (i < (digits.length - 1)) && (((i + 1) % dividerPosition) == 0)) {
-                            formatted.append(divider);
-                        }
-                    }
-                }
-
-                return formatted.toString();
-            }
-
-            private char[] getDigitArray(final Editable s, final int size) {
-                char[] digits = new char[size];
-                int index = 0;
-                for (int i = 0; i < s.length() && index < size; i++) {
-                    char current = s.charAt(i);
-                    if (Character.isDigit(current)) {
-                        digits[index] = current;
-                        index++;
-                    }
-                }
-                return digits;
-            }
-        });
+        mSpanTextView.setSpanText("彩色部分可点击"  , 0 , "彩色".length());
+        mSpanTextView.setSpanClickListener(mOnClickListener);
     }
 }
