@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/btn_request_thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取缩略图"
+        android:onClick="onClick"
+        android:layout_margin="4dp"
+        />
+    <Button
+        android:id="@+id/btn_request_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取原图"
+        android:onClick="onClick"
+        android:layout_margin="4dp"
+        />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/iv_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        android:layout_margin="20dp"
+        android:scaleType="center"
+        />
+
+</LinearLayout>
