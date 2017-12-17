@@ -6,14 +6,9 @@
     android:background="#888888"
     >
     <com.example.ljy.slidingmenutest.MySlidingMenu
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        vshal:rightpadding="150dp"
-        >
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        vshal:rightpadding="150dp"
         >
         <include layout="@layout/sidemenu"/>
         <LinearLayout
@@ -30,6 +25,5 @@
                 android:onClick="btn_Click"
                 />
         </LinearLayout>
-    </LinearLayout>
     </com.example.ljy.slidingmenutest.MySlidingMenu>
 </RelativeLayout>
