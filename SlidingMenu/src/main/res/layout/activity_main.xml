@@ -25,5 +25,6 @@
                 android:onClick="btn_Click"
                 />
         </LinearLayout>
+
     </com.example.ljy.slidingmenutest.MySlidingMenu>
 </RelativeLayout>

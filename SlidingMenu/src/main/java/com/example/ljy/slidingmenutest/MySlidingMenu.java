@@ -2,12 +2,14 @@ package com.example.ljy.slidingmenutest;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 import com.example.ljy.slidingmenutest.utils.ViewUtil;
 
@@ -37,12 +39,12 @@ public class MySlidingMenu extends ViewGroup {
         super(context, attrs,defStyleRes);
         //自定义属性的获取
         TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.MySlidingMenu,defStyleRes,0);
-        int tempDistance = (int)a.getDimension(R.styleable.MySlidingMenu_rightpadding,100);
+        mRdistance = (int)a.getDimension(R.styleable.MySlidingMenu_rightpadding,100);
         mHasFirstLoad = false;
 
-        mRdistance = (int)TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, tempDistance, context
-                        .getResources().getDisplayMetrics());
+//        mRdistance = (int)TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP, tempDistance, context
+//                        .getResources().getDisplayMetrics());
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(displayMetrics);
@@ -63,6 +65,11 @@ public class MySlidingMenu extends ViewGroup {
 //        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
         if(!mHasFirstLoad){
             mMenu = (ViewGroup) getChildAt(0);
             mContent = (ViewGroup) getChildAt(1);
@@ -72,8 +79,11 @@ public class MySlidingMenu extends ViewGroup {
             mContent.getLayoutParams().width = mScreenWidth;
             mContent.getLayoutParams().height = mScreenHeight;
             mHasFirstLoad = true;
+            setLayoutParams(new RelativeLayout.LayoutParams(widthSize,heightSize));
+            mContent.measure(widthMeasureSpec,heightMeasureSpec);
+            mMenu.measure(widthMeasureSpec,heightMeasureSpec);
         }
-
+        setMeasuredDimension(widthSize , heightSize);
     }
 
     @Override
@@ -81,6 +91,13 @@ public class MySlidingMenu extends ViewGroup {
         if(changed){
             mMenu.scrollTo(-mMenuWidth,0);
         }
+        mContent.layout(l,t,r,b);
+        mMenu.layout(l,t,mMenuWidth,b);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
     }
 
     @Override
