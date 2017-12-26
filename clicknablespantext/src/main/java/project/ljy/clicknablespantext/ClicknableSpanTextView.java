@@ -1,13 +1,16 @@
 package project.ljy.clicknablespantext;
 
 import android.content.Context;
-import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.TextView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Title: ClicknableSpanText
@@ -22,7 +25,7 @@ public class ClicknableSpanTextView extends android.support.v7.widget.AppCompatT
 
     private OnClickListener mOnClickListener;
 
-    SpannableString mSpannable;
+    SpannableStringBuilder mSpannable;
 
     public ClicknableSpanTextView(Context context) {
         super(context);
@@ -41,12 +44,32 @@ public class ClicknableSpanTextView extends android.support.v7.widget.AppCompatT
         if(string.length() < end || start < 0){
             return ;
         }
-        mSpannable = new SpannableString(string);
-        setLinkTextColor(getResources().getColor(R.color.btn_text_blue));
-        mSpannable.setSpan(new Clickable(mOnClickListener), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mSpannable = new SpannableStringBuilder(string);
+        mSpannable.setSpan(new ForegroundColorSpan(getLinkTextColors().getDefaultColor()), start , end , Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        int[] underLineSection = calculateUnderlineSection(string ,"[\\u4e00-\\u9fa5|\\d+|-]+" , start , end);
+        mSpannable.setSpan(new Clickable(mOnClickListener), underLineSection[0], underLineSection[1], Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         setText(mSpannable);
-        setMovementMethod(LinkMovementMethod.getInstance());
+        setMovementMethod(MyLinkMovementMethod.getInstance());
         setHighlightColor(getResources().getColor(android.R.color.transparent));
+    }
+
+    /**
+     * 计算不包含书名号等非汉字，数字以及-号的下划线区间
+     * @param string 全长字符串
+     * @param matchStr 表达式规则
+     * @param start 颜色字符串在全长字符串中的起始位置
+     * @param end 颜色字符串在全长字符串中的终止位置
+     * @return 下划线区间
+     */
+    private int[] calculateUnderlineSection(String string , String matchStr , int start  ,int end){
+        int[] section = new int[2];
+        Pattern p = Pattern.compile(matchStr);
+        Matcher m = p.matcher(string.substring(start , end));
+        if(m.find()){
+            section[0] = m.start();
+            section[1] = m.end();
+        }
+        return section;
     }
 
     public void setSpanClickListener(OnClickListener onClickListener){
