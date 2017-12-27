@@ -171,7 +171,7 @@ public class MuiltEdtActivity extends AppCompatActivity {
         mInputEdt.setInputType(InputType.TYPE_CLASS_NUMBER);
         mInputEdt.addTextChangedListener(new MyTextWatcher());
 
-        mSpanTextView.setSpanText("彩色部分可点击"  , 0 , "彩色".length());
         mSpanTextView.setSpanClickListener(mOnClickListener);
+        mSpanTextView.setSpanText("《400-1201-1221天天》部分可点击"  , 0 , "《400-1201-1221天天》".length());
     }
 }
