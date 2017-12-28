@@ -3,6 +3,7 @@ package project.ljy.functionutils;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,5 +89,14 @@ public class MuiltUseActivity extends AppCompatActivity {
         abstract void initView();
 
         abstract void clickAction();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            setResult(RESULT_OK);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
