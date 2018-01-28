@@ -74,12 +74,9 @@ public class MySlidingMenu extends ViewGroup {
             mMenu = (ViewGroup) getChildAt(0);
             mContent = (ViewGroup) getChildAt(1);
             mMenuWidth = mRdistance;
-            mMenu.getLayoutParams().width = mRdistance;
-            mMenu.getLayoutParams().height = mScreenHeight;
             mContent.getLayoutParams().width = mScreenWidth;
             mContent.getLayoutParams().height = mScreenHeight;
             mHasFirstLoad = true;
-            setLayoutParams(new RelativeLayout.LayoutParams(widthSize,heightSize));
             mContent.measure(widthMeasureSpec,heightMeasureSpec);
             mMenu.measure(widthMeasureSpec,heightMeasureSpec);
         }
